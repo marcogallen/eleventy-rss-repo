@@ -1,0 +1,33 @@
+---js
+{
+pagination:{
+    data: "feeds",
+    size: 1,
+    alias: "item",
+    
+    before: function(data) {
+      const feedItems = [];
+
+      for (const category of data) {
+        for (const source of category.items) {
+          for (const item of source.items) {
+            feedItems.push(item);
+          }
+        }
+      }
+
+      return feedItems;
+    }
+},
+
+permalink: "/{{item.feedTitle | slug}}/{{ item.title | slug}}/",
+layout: "base.njk",
+eleventyComputed:{
+    title: "{{item.title}}"
+    }
+}
+---
+
+            <strong>{{ item.date }}</strong>
+            <a href="#">{{ item.title }} </a>
+            {{item.content | safe}}

@@ -1,0 +1,34 @@
+---js
+{
+pagination:{
+    data: "feeds",
+    size: 1,
+    alias: "sources",
+    before: function(data){
+        const sourceItems = []
+
+        for(const category of data){
+            for(const source of category.items){
+                sourceItems.push(source)
+            }
+        }
+        return sourceItems
+    }
+},
+
+permalink: "/{{ sources.feedTitle | slug}}/",
+layout: "base.njk",
+eleventyComputed:{
+    title: "{{sources.feedTitle}}"
+    }
+}
+---
+
+    <ul>
+        {% for item in sources.items%}
+        <li>
+            <strong>{{ item.date }}</strong>
+            <a href="#">{{ item.title }} </a>
+        </li>
+        {%endfor%}
+    </ul>
