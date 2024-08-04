@@ -6,7 +6,7 @@ const env = process.env.ELEVENTY_ENV;
 const d = new Date();
 
 if (env == "dev") {
-  d.setDate(d.getDate() - 30);
+  d.setDate(d.getDate() - 60);
 }
 
 console.log(new Date(d));
